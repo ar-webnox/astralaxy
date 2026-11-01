@@ -1,0 +1,395 @@
+@import "tailwindcss";
+@import "./starfield.css";
+
+@theme inline {
+  --color-void: #05070d;
+  --color-space: #080c16;
+  --color-navy: #0b1426;
+  --color-ink: #eef2f8;
+  --color-mute: #9ba9c0;
+  --color-dim: #74839b;
+  --color-line: rgba(255, 255, 255, 0.09);
+  --color-ion: #9cc0ff;
+  --color-ember: #e6b98a;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-instrument), "Iowan Old Style", Georgia, serif;
+}
+
+html {
+  color-scheme: dark;
+  background: var(--color-void);
+  scroll-behavior: smooth;
+  /* The menu and image viewer lock page scroll; reserving the gutter stops the
+     page from shifting sideways when the scrollbar disappears. */
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* No background on body: <html> paints the page colour and the fixed starfield
+   layer (z-index -10) must remain visible above it. */
+body {
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(156, 192, 255, 0.3);
+}
+
+/* A crisp ring plus a faint halo, so focus is obvious on a dark canvas without
+   being harsh. The radius is left alone so pills keep their shape. */
+:focus-visible {
+  outline: 2px solid var(--color-ion);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 7px rgba(156, 192, 255, 0.13);
+}
+
+/* ------------------------------------------------------------------ */
+/* Surfaces                                                            */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  /* Information panel: a faint top light and an inner highlight give the
+     impression of glass without any blur, so large areas stay cheap. */
+  .panel {
+    border: 1px solid var(--color-line);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018));
+    border-radius: 1rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Small floating controls over imagery. Use .glass-blur only on small areas
+     that sit over static content. */
+  .glass {
+    background: rgba(9, 14, 26, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+  /* Blur only where there is GPU headroom; phones keep the tinted surface. */
+  @media (min-width: 768px) {
+    @supports (backdrop-filter: blur(1px)) {
+      .glass-blur {
+        -webkit-backdrop-filter: blur(12px) saturate(1.2);
+        backdrop-filter: blur(12px) saturate(1.2);
+      }
+    }
+  }
+
+  /* Cards: lift and brighten on hover and let the picture settle in slowly.
+     Applied to the inner element, because RevealLi owns the wrapper's transform. */
+  .card {
+    transition:
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.4s ease,
+      box-shadow 0.55s ease;
+  }
+  .card .media img {
+    transition-property: opacity, transform;
+    transition-duration: 0.7s, 1.2s;
+    transition-timing-function: ease, cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+        0 28px 60px -30px rgba(0, 0, 0, 0.95),
+        0 0 0 1px rgba(156, 192, 255, 0.07);
+    }
+    .card:hover .media img {
+      transform: scale(1.045);
+    }
+  }
+  /* Touch feedback: a gentle press instead of a hover lift. */
+  .card:active {
+    transform: scale(0.992);
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ember);
+    font-weight: 500;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    margin-right: 0.85rem;
+    background: linear-gradient(90deg, transparent, var(--color-ember));
+  }
+  .eyebrow-plain::before {
+    display: none;
+  }
+
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0.9rem;
+    right: 0.9rem;
+    bottom: 0.3rem;
+    height: 1px;
+    background: var(--color-ember);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-link:hover::after,
+  .nav-link[aria-current="location"]::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Atmosphere                                                          */
+/* ------------------------------------------------------------------ */
+
+/* Two star layers fade out of phase, which reads as twinkling without
+   animating individual stars. Opacity only, so it stays on the compositor. */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.12;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.twinkle-a {
+  animation: twinkle 6.5s ease-in-out infinite;
+}
+.twinkle-b {
+  animation: twinkle 9s ease-in-out infinite;
+  animation-delay: -3.5s;
+}
+
+[data-paused="true"] .twinkle-a,
+[data-paused="true"] .twinkle-b,
+[data-paused="true"] .dust {
+  animation-play-state: paused;
+}
+
+.shooting-star {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 130px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Hero dust: a handful of motes drifting upward very slowly. */
+@keyframes dust {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.65;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate3d(var(--dx, 0px), -70px, 0);
+    opacity: 0;
+  }
+}
+
+.dust {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(230, 236, 255, 0.9);
+  animation: dust var(--dur, 24s) linear infinite;
+  animation-delay: var(--del, 0s);
+}
+
+/* Soft mask so the nebula photograph dissolves into the sky rather than
+   appearing as a rectangle. */
+.nebula-mask {
+  -webkit-mask-image: radial-gradient(ellipse 62% 72% at 78% 32%, #000 0%, transparent 100%);
+  mask-image: radial-gradient(ellipse 62% 72% at 78% 32%, #000 0%, transparent 100%);
+}
+
+/* Cursor effect: one soft glow plus a short trail of tiny stars. Only
+   rendered for fine pointers; pointer-events are off so nothing is blocked. */
+.cursor-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.cursor-fx[data-visible="1"] {
+  opacity: 1;
+}
+.cursor-fx > * {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+.cursor-glow {
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(156, 192, 255, 0.3) 0%,
+    rgba(156, 192, 255, 0.1) 42%,
+    transparent 70%
+  );
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
+}
+.cursor-fx[data-active="1"] .cursor-glow {
+  transform: scale(1.7);
+}
+.cursor-dot {
+  border-radius: 9999px;
+  background: rgba(236, 242, 255, 1);
+}
+
+/* Constellation figures draw their lines in once, then the stars breathe. */
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes star-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.fig-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.fig-line-dashed {
+  stroke-dasharray: 2 2;
+}
+.fig-star {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ------------------------------------------------------------------ */
+/* Entrances                                                           */
+/* ------------------------------------------------------------------ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .fade-in {
+    animation: fade 0.45s ease both;
+  }
+  dialog[open].dialog-in {
+    animation: menu-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .fig-line {
+    stroke-dashoffset: 1;
+    animation: draw 1.1s cubic-bezier(0.4, 0, 0.2, 1) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .fig-star {
+    animation: star-pulse 4.5s ease-in-out infinite;
+    animation-delay: var(--d, 0ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twinkle-a,
+  .twinkle-b {
+    animation: none;
+    opacity: 0.7;
+  }
+  .dust,
+  .shooting-star,
+  .cursor-fx {
+    display: none;
+  }
+  .card,
+  .card:hover,
+  .card:active {
+    transform: none;
+  }
+  .card:hover .media img {
+    transform: none;
+  }
+}
+
+dialog::backdrop {
+  background: rgba(2, 4, 9, 0.8);
+}

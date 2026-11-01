@@ -1,0 +1,209 @@
+{
+  "milkyWay": {
+    "file": "ESO - Milky Way.jpg",
+    "alt": "The Milky Way arching across a dark southern sky above the Atacama Desert",
+    "credit": "ESO / S. Brunier",
+    "caption": "The Milky Way over the Atacama Desert",
+    "category": "Galaxies",
+    "gallery": true
+  },
+  "andromeda": {
+    "file": "Andromeda Galaxy (with h-alpha).jpg",
+    "alt": "The Andromeda Galaxy, a large tilted spiral with a bright core and dusty arms",
+    "caption": "Andromeda Galaxy (M31)",
+    "category": "Galaxies",
+    "gallery": true
+  },
+  "pinwheel": {
+    "file": "M101 hires STScI-PRC2006-10a.jpg",
+    "alt": "The Pinwheel Galaxy, a face-on spiral with sweeping arms and clusters of blue stars",
+    "credit": "NASA, ESA and STScI",
+    "caption": "Pinwheel Galaxy (M101)",
+    "category": "Galaxies",
+    "gallery": true
+  },
+  "m87Jet": {
+    "file": "M87 jet.jpg",
+    "alt": "Hubble image of the giant elliptical galaxy M87 with a thin blue jet streaming from its core",
+    "credit": "NASA / The Hubble Heritage Team (STScI/AURA)",
+    "caption": "Messier 87 and its jet",
+    "category": "Galaxies",
+    "gallery": true
+  },
+  "orion": {
+    "file": "Orion Nebula - Hubble 2006 mosaic 18000.jpg",
+    "alt": "The Orion Nebula, a glowing cloud of gas and dust with bright young stars at its centre",
+    "credit": "NASA, ESA, M. Robberto (STScI/ESA) and the Hubble Space Telescope Orion Treasury Project Team",
+    "caption": "Orion Nebula (M42)",
+    "category": "Nebulae",
+    "gallery": true
+  },
+  "pillars": {
+    "file": "Pillars of creation 2014 HST WFC3-UVIS full-res denoised.jpg",
+    "alt": "Dark towering columns of gas and dust glowing at their edges in the Eagle Nebula",
+    "credit": "NASA, ESA and the Hubble Heritage Team (STScI/AURA)",
+    "caption": "Pillars of Creation",
+    "category": "Nebulae",
+    "gallery": true
+  },
+  "cosmicCliffs": {
+    "file": "NASA’s Webb Reveals Cosmic Cliffs, Glittering Landscape of Star Birth.jpg",
+    "alt": "A cliff-like wall of rust-coloured gas and dust studded with young stars beneath a blue haze",
+    "credit": "NASA, ESA, CSA and STScI",
+    "caption": "Cosmic Cliffs in the Carina Nebula",
+    "category": "Nebulae",
+    "gallery": true
+  },
+  "crab": {
+    "file": "Crab Nebula.jpg",
+    "alt": "The Crab Nebula, tangled orange filaments of gas surrounding a blue glow",
+    "credit": "NASA and ESA",
+    "caption": "Crab Nebula (M1)",
+    "category": "Nebulae",
+    "gallery": true
+  },
+  "casA": {
+    "file": "Cas A (NIRCam image) (weic2330a).jpg",
+    "alt": "Cassiopeia A, a lumpy shell of glowing pink and orange gas left by an exploded star",
+    "credit": "NASA, ESA, CSA and STScI",
+    "caption": "Cassiopeia A in infrared light",
+    "category": "Stars & remnants",
+    "gallery": true
+  },
+  "sun": {
+    "file": "The Sun by the Atmospheric Imaging Assembly of NASA's Solar Dynamics Observatory - 20100819.jpg",
+    "alt": "The Sun in extreme ultraviolet light, showing glowing loops of plasma above active regions",
+    "credit": "NASA / Solar Dynamics Observatory",
+    "caption": "The Sun in ultraviolet light",
+    "category": "Stars & remnants",
+    "gallery": true
+  },
+  "mercury": {
+    "file": "Mercury in color - Prockter07 centered.jpg",
+    "alt": "Mercury, a cratered grey-brown world, shown in enhanced colour",
+    "credit": "NASA / Johns Hopkins APL / Carnegie Institution of Washington",
+    "caption": "Mercury in enhanced colour",
+    "category": "Solar System",
+    "gallery": false
+  },
+  "venus": {
+    "file": "Venus-real color.jpg",
+    "alt": "Venus, a pale planet wrapped in thick unbroken cloud",
+    "credit": "NASA",
+    "caption": "Venus, shrouded in cloud",
+    "category": "Solar System",
+    "gallery": false
+  },
+  "earth": {
+    "file": "The Blue Marble.jpg",
+    "alt": "Earth photographed in full view, with blue oceans, white cloud and the African continent",
+    "credit": "NASA / Apollo 17 crew",
+    "caption": "The Blue Marble, 1972",
+    "category": "Solar System",
+    "gallery": true
+  },
+  "mars": {
+    "file": "OSIRIS Mars true color.jpg",
+    "alt": "Mars in natural colour, a rust-red globe with dark surface features and a pale polar cap",
+    "credit": "ESA & MPS for the OSIRIS Team (CC BY-SA 3.0 IGO)",
+    "caption": "Mars in natural colour",
+    "category": "Solar System",
+    "gallery": false
+  },
+  "jupiter": {
+    "file": "Great red spot juno 20170712.jpg",
+    "alt": "Jupiter's Great Red Spot, a vast storm swirling among cream and brown cloud bands",
+    "credit": "NASA / JPL-Caltech / SwRI / MSSS",
+    "caption": "Jupiter's Great Red Spot, seen by Juno",
+    "category": "Solar System",
+    "gallery": true
+  },
+  "saturn": {
+    "file": "Saturn from Hubble.jpg",
+    "alt": "Saturn and its broad ring system photographed by the Hubble Space Telescope",
+    "credit": "NASA and ESA",
+    "caption": "Saturn and its rings",
+    "category": "Solar System",
+    "gallery": true
+  },
+  "uranus": {
+    "file": "Uranus Voyager2 color calibrated.png",
+    "alt": "Uranus, a pale blue-green featureless globe photographed by Voyager 2",
+    "credit": "NASA / JPL-Caltech",
+    "caption": "Uranus from Voyager 2",
+    "category": "Solar System",
+    "gallery": false
+  },
+  "neptune": {
+    "file": "Neptune Voyager2 color calibrated.png",
+    "alt": "Neptune, a deep blue globe with faint cloud streaks photographed by Voyager 2",
+    "credit": "NASA / JPL-Caltech",
+    "caption": "Neptune from Voyager 2",
+    "category": "Solar System",
+    "gallery": false
+  },
+  "m87Shadow": {
+    "file": "Black hole - Messier 87 crop max res.jpg",
+    "alt": "The first image of a black hole: a glowing orange ring of hot gas around a dark central shadow",
+    "credit": "Event Horizon Telescope collaboration (CC BY 4.0)",
+    "caption": "The black hole at the heart of M87",
+    "category": "Deep space",
+    "gallery": true
+  },
+  "moon": {
+    "file": "FullMoon2010.jpg",
+    "alt": "The full Moon, with dark volcanic plains and bright cratered highlands",
+    "credit": "Gregory H. Revera (CC BY-SA 3.0)",
+    "caption": "The full Moon",
+    "category": "Exploration",
+    "gallery": true
+  },
+  "aldrin": {
+    "file": "Buzz salutes the U.S. Flag.jpg",
+    "alt": "Astronaut Buzz Aldrin saluting the American flag on the lunar surface during Apollo 11",
+    "credit": "NASA",
+    "caption": "Apollo 11 on the Moon, 1969",
+    "category": "Exploration",
+    "gallery": true
+  },
+  "mccandless": {
+    "file": "Bruce McCandless II during EVA in 1984.jpg",
+    "alt": "Astronaut Bruce McCandless floating untethered above Earth in a jetpack",
+    "credit": "NASA",
+    "caption": "An untethered spacewalk, 1984",
+    "category": "Exploration",
+    "gallery": true
+  },
+  "hubble": {
+    "file": "Hubble 2009 close-up.jpg",
+    "alt": "The Hubble Space Telescope in orbit after its final servicing mission",
+    "credit": "NASA",
+    "caption": "Hubble after its final servicing mission",
+    "category": "Exploration",
+    "gallery": true
+  },
+  "jwst": {
+    "file": "James Webb Primary Mirror.jpg",
+    "alt": "The gold-coated hexagonal mirror segments of the James Webb Space Telescope",
+    "credit": "NASA",
+    "caption": "The James Webb Space Telescope mirror",
+    "category": "Exploration",
+    "gallery": true
+  },
+  "trappist": {
+    "file": "PIA22093-TRAPPIST-1-PlanetLineup-20180205.jpg",
+    "alt": "Artist's illustration of the seven Earth-sized planets of the TRAPPIST-1 system in a row",
+    "credit": "NASA / JPL-Caltech (artist's concept)",
+    "caption": "The TRAPPIST-1 system (illustration)",
+    "category": "Deep space",
+    "gallery": true
+  },
+  "deepField": {
+    "file": "Webb's First Deep Field.jpg",
+    "alt": "Webb's first deep field: thousands of galaxies, many stretched into arcs by a foreground galaxy cluster",
+    "credit": "NASA, ESA, CSA and STScI",
+    "caption": "Webb's First Deep Field",
+    "category": "Deep space",
+    "gallery": true
+  }
+}
